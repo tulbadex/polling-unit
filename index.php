@@ -77,16 +77,29 @@
         .then( res => res.json())
         .then( data => {
             var tr;
+            var total = 0;
 
             data.forEach(data => {
+                if (data.includes('undefined')) {
+                    tr += ''
+                }
                 tr += `
                     <tr>
                         <td>${data.party_abbreviation}</td>
                         <td>${data.score}</td>
                     </tr>
                 `
+                total += Number(data.score)
             });
-            let pollResult = document.querySelector("#poll-result").innerHTML = tr
+
+            let i;
+
+            /* for (i = 0; i < data.length; i++) {
+                total += Number(data[i].score);
+                
+            } */
+            let totalValue = `<tr><td span="3">Total = ${total}</td></tr>`
+            let pollResult = document.querySelector("#poll-result").innerHTML = tr + totalValue
         })
     })
 </script>
