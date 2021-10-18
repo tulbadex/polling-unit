@@ -80,6 +80,9 @@
             var total = 0;
 
             data.forEach(data => {
+                if (data.includes('undefined')) {
+                    tr += ''
+                }
                 tr += `
                     <tr>
                         <td>${(data.party_abbreviation == 'undefined')?'':data.party_abbreviation}</td>
@@ -88,6 +91,7 @@
                 `
                 total += Number(data.score)
             });
+
 
             let totalValue = `<tr><td span="3">Total = ${total}</td></tr>`
             let pollResult = document.querySelector("#poll-result").innerHTML = tr + totalValue
